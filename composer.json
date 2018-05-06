@@ -1,0 +1,36 @@
+{
+    "name": "gerardojunior/tap.api",
+    "description": "Api rest twitter analytics panel",
+    "type": "project",
+    "license": "MIT",
+    "authors": [{ "name": "Gerardo Junior",
+                  "email": "me@gerardo-junior.com" }],
+    "autoload": {
+        "psr-4": {
+            "App\\": "src"
+        },
+        "classmap": [ "app/AppKernel.php" ]
+    },
+    "require": {
+        
+    },
+    "require-dev": {
+        "overtrue/phplint": "^1.1",
+        "phpunit/phpunit": "^7.1",
+        "snowair/phalcon-debugbar": "^1.2",
+        "brainmaestro/composer-git-hooks": "^2.4"
+    },
+    "minimum-stability": "stable",
+    "scripts": {
+        "lint": "phplint ./ --exclude=vendor",
+        "test": [
+            "@lint",
+            "phpunit"
+        ]
+    },
+    "extra": {
+        "hooks": {
+            "pre-commit": "@test"
+        }
+    }
+}
