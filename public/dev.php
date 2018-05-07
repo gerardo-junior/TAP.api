@@ -16,6 +16,10 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
     exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
 }
 
-require __DIR__.'/../vendor/autoload.php';
+define('_DEBUG_', true);
+ini_set('display_errors', "On");
+error_reporting(E_ALL);
+$debug = new Phalcon\Debug();
+$debug->listen();
 
-echo 'teste';
+require_once __DIR__.'/index.php';

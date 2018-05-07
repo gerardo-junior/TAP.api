@@ -6,6 +6,6 @@ class TweetController extends Controller
 {
 	public function indexAction()
 	{
-        	echo "teste"
+        	echo "teste";
 	}
 }
