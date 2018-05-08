@@ -16,7 +16,7 @@ try {
 } catch (\Exception $e) {
     
     // Handle exceptions
-    $di = $kernel->app && $kernel->app->di ? $kernel->app->di : new PhalconRest\Di\FactoryDefault();
+    $di = $kernel && $kernel->di ? $kernel->di : new PhalconRest\Di\FactoryDefault();
     
     $response = $di->getShared(App\Constants\Services::RESPONSE);
     if(!$response || ! $response instanceof PhalconApi\Http\Response){
