@@ -1,4 +1,4 @@
 /vendor/
 /build/
 .phplint-cache
-config.Ini
+config.ini
