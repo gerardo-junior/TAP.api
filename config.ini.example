@@ -1,0 +1,13 @@
+[database]
+mongodb.host = mongodb
+mongodb.port = 27017
+
+[watson]
+toneanalyzer.username =
+toneanalyzer.password =
+
+[twitter]
+twitter.acesstoken.username =
+twitter.acesstoken.password =
+twitter.consumer.key =
+twitter.consumer.secret =
