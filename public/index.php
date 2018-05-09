@@ -41,17 +41,6 @@ try {
     }
 
     $config = new Phalcon\Config\Adapter\Ini($configPath);
-    // $config = new Phalcon\Config(include_once $configPath);
-
-    $envConfigPath = CONFIG_DIR . '/server.' . APPLICATION_ENV . '.php';
-
-    if (!is_readable($envConfigPath)) {
-        throw new Exception('Unable to read config from ' . $envConfigPath);
-    }
-
-    $override = new Phalcon\Config(include_once $envConfigPath);
-
-    $config = $config->merge($override);
 
 
     // Instantiate application & DI
@@ -96,10 +85,10 @@ try {
     }
 
     $debugMode = isset($config->debug) ? $config->debug : (APPLICATION_ENV == 'development');
+    $debugMode = $debugMode === 'true' || $debugMode ? true : false;
 
     $response->setErrorContent($e, $debugMode);
-}
-finally {
+} finally {
 
     // Send response
     if (!$response->isSent()) {

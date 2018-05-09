@@ -2,7 +2,7 @@ version: "3.4"
 services:
 
   api: 
-    image: gerardojunior/tap.api.environment:stable 
+    image: gerardojunior/tap.api.environment:stable
     restart: on-failure
     volumes:
       - type: bind
@@ -20,6 +20,8 @@ services:
     restart: on-failure
     environment:
       - MONGO_DATA_DIR=/data/db
+      - MONGO_INITDB_ROOT_USERNAME=danfwefnwefoffbenwfoefnwe
+      - MONGO_INITDB_ROOT_PASSWORD=buqbdudwqbduqbddbqwdwddqw
     volumes:
       - type: volume
         source: dbdata

@@ -15,12 +15,12 @@
 
 ## Come on, do your tests
 
-##### But what will you need?
+#### But what will you need?
 
 - [docker](https://docs.docker.com/install/)
 - [docker-compose](https://docs.docker.com/compose/)
 
-##### Okay, how to put it to up?
+#### Okay, how to put it to up?
 
 ```bash
 git clone https://github.com/gerardo-junior/tap.api.git
@@ -33,6 +33,13 @@ docker-compose up
 Wait for message and open [localhost:1234](http://localhost:1234) in your browser
 
 ** For more information about the containers read the [README](http://github.com/gerardo-junior/TAP.api.environment) of api.environment
+
+#### How to delete used imagess
+
+```bash
+docker-compose down --rmi all
+```
+
 
 ## Run without docker:
 
