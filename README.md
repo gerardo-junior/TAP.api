@@ -1,5 +1,70 @@
-# Api environment 
+# API Rest of twitter analytics panel
 
-### License
 
+```
+    [+] AUTOR:        Gerardo Junior
+    [+] SITE:         http://gerardo-junior.com
+    [+] EMAIL:        me@gerardo-junior.com
+    [+] GITHUB:       https://github.com/gerardo-junior/tap.api
+    [+] TELEGRAM:     @MrGerardoJunior
+```
+
+| master  | develop  |
+| :------------: | :------------: |
+| [![Build Status](https://api.travis-ci.org/gerardo-junior/TAP.api.svg?branch=master)](https://travis-ci.org/gerardo-junior/TAP.api)  |  [![Build Status](https://api.travis-ci.org/gerardo-junior/TAP.api.svg?branch=develop)](https://travis-ci.org/gerardo-junior/TAP.api) |
+
+## Come on, do your tests
+
+##### But what will you need?
+
+- [docker](https://docs.docker.com/install/)
+- [docker-compose](https://docs.docker.com/compose/)
+
+##### Okay, how to put it to up?
+
+```bash
+git clone https://github.com/gerardo-junior/tap.api.git
+cd tap.api
+
+cp config.example.ini config.ini # and configure!
+docker-compose up
+```
+
+Wait for message and open [localhost:1234](http://localhost:1234) in your browser
+
+** For more information about the containers read the [README](http://github.com/gerardo-junior/TAP.api.environment) of api.environment
+
+## Run without docker:
+
+you will need to install:
+
+- [mongodb](https://www.mongodb.com/) 3.6.4
+- [php](https://php.net): 7.2.5 
+- [apache](https://www.apache.org/): 2.4.33
+- [php mongodb driver](https://docs.mongodb.com/ecosystem/drivers/php/): 1.4.3
+- [phalcon](https://phalconphp.com/): 3.3.2
+- [composer](https://getcomposer.org/): 1.6.5
+
+and configure apache for [/public](/public) folder
+
+## Used packages:
+
+- [redound/phalcon-rest](https://packagist.org/packages/redound/phalcon-rest): ^2.0.0
+- [league/fractal](https://packagist.org/packages/league/fractal): ^0.13.0
+- [cboden/ratchet](https://packagist.org/packages/cboden/ratchet): ^0.4.1
+- [zircote/swagger-php](https://packagist.org/packages/zircote/swagger-php): ^2.0
+- [spatie/twitter-streaming-api](https://packagist.org/packages/spatie/twitter-streaming-api): ^1.4
+
+for development environment:
+
+- [codeception/codeception](https://packagist.org/packages/codeception/codeception): ^2.1
+- [overtrue/phplint](https://packagist.org/packages/overtrue/phplint): ^1.1
+- [brainmaestro/composer-git-hooks](https://packagist.org/packages/brainmaestro/composer-git-hooks): ^2.4
+- [phalcon/devtools](https://packagist.org/packages/phalcon/devtools): ^3.2
+
+## Troubleshooting
+
+
+
+### License  
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details

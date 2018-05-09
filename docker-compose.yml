@@ -2,7 +2,7 @@ version: "3.4"
 services:
 
   api: 
-    image: gerardojunior/tap.api.environment:stable
+    image: gerardojunior/tap.api.environment:stable 
     restart: on-failure
     volumes:
       - type: bind
