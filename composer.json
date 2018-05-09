@@ -18,6 +18,7 @@
     "require-dev": {
         "ext-xdebug": "^2.6",
         "codeception/codeception": "^2.1",
+        "overtrue/phplint": "^1.1",
         "brainmaestro/composer-git-hooks": "^2.4",
         "phalcon/devtools": "^3.2"
     },
