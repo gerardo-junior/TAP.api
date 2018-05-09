@@ -4,6 +4,8 @@ services:
   api: 
     image: gerardojunior/tap.api.environment:stable 
     restart: on-failure
+    environment:
+      - DEBUG=true
     volumes:
       - type: bind
         source: ./
