@@ -20,10 +20,6 @@
 - [docker](https://docs.docker.com/install/)
 - [docker-compose](https://docs.docker.com/compose/)
 
-or 
-
-- [docker toolbox](https://docs.docker.com/toolbox/)
-
 ##### Okay, how to put it to up?
 
 ```bash
@@ -34,7 +30,22 @@ cp config.example.ini config.ini # and configure!
 docker-compose up
 ```
 
-Open 0.0.0.0:1234 in your browser
+Wait for message and open [localhost:1234](http://localhost:1234) in your browser
+
+** For more information about the containers read the [README](http://github.com/gerardo-junior/TAP.api.environment) of api.environment
+
+## Run without docker:
+
+you will need to install:
+
+- [mongodb](https://www.mongodb.com/) 3.6.4
+- [php](https://php.net): 7.2.5 
+- [apache](https://www.apache.org/): 2.4.33
+- [php mongodb driver](https://docs.mongodb.com/ecosystem/drivers/php/): 1.4.3
+- [phalcon](https://phalconphp.com/): 3.3.2
+- [composer](https://getcomposer.org/): 1.6.5
+
+and configure apache for [/public](/public) folder
 
 ## Used packages:
 
@@ -50,6 +61,9 @@ for development environment:
 - [overtrue/phplint](https://packagist.org/packages/overtrue/phplint): ^1.1
 - [brainmaestro/composer-git-hooks](https://packagist.org/packages/brainmaestro/composer-git-hooks): ^2.4
 - [phalcon/devtools](https://packagist.org/packages/phalcon/devtools): ^3.2
+
+## Troubleshooting
+
 
 
 ### License  
