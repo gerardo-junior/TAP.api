@@ -21,10 +21,12 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 install:
-  - docker pull gerardojunior/tap.api.environment:stable
+  - git clone https://github.com/gerardo-junior/tap.api.environment.git && cd tap.api.environment
+  - docker build . --tag gerardojunior/tap.api.environment:stable --build-arg DEBUG=true
+  - cd .. && rm -Rf tap.api.environment
 
 script:
-  - docker run -it --rm -e DEBUG=false -v $(pwd):/usr/share/src gerardojunior/tap.api.environment:stable composer test
+  - docker run -it --rm -e DEBUG=true -v $(pwd):/usr/share/src gerardojunior/tap.api.environment:stable composer test
   - docker-compose up -d
   - docker-compose down
 
