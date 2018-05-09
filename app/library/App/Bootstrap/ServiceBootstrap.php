@@ -7,11 +7,10 @@ use PhalconRest\Api;
 use Phalcon\DiInterface;
 use App\BootstrapInterface;
 use App\Constants\Services;
-use App\Auth\UsernameAccountType;
 use App\Fractal\CustomSerializer;
 use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Mvc\View\Simple as View;
-use App\User\Service as UserService;
+// use App\User\Service as UserService;
 use App\Auth\Manager as AuthManager;
 use Phalcon\Events\Manager as EventsManager;
 use League\Fractal\Manager as FractalManager;
@@ -34,7 +33,7 @@ class ServiceBootstrap implements BootstrapInterface
         $di->setShared(Services::DB, function () {
             $config = $this->getShared('config');
 
-            if (!$config->database->mongodb->username || !$config->database->mongodb->password) {
+            if (!isset($config->database->mongodb->username) || !isset($config->database->mongodb->password)) {
                 $dsn = "mongodb://{$config->database->mongodb->host}:{$config->database->mongodb->port}";
             } else {
                 $dsn = sprintf(
@@ -46,9 +45,14 @@ class ServiceBootstrap implements BootstrapInterface
                 );
             }
 
-            return new \MongoDB\Driver\Manager($dsn);
+            $client = new \Phalcon\Db\Adapter\MongoDB\Client($dsn);
+            return $client->selectDatabase($config->database->mongodb->database);
         });
 
+        // Collection Manager is required for MongoDB
+        $di->setShared('collectionManager', function () {
+            return new \Phalcon\Mvc\Collection\Manager();
+        });
 
         /**
          * @description Phalcon - \Phalcon\Mvc\Url
@@ -90,13 +94,13 @@ class ServiceBootstrap implements BootstrapInterface
         /**
          * @description Phalcon - AuthManager
          */
-        $di->setShared(Services::AUTH_MANAGER, function () use ($di, $config) {
+        // $di->setShared(Services::AUTH_MANAGER, function () use ($di, $config) {
 
-            $authManager = new AuthManager($config->get('authentication')->expirationTime);
-            $authManager->registerAccountType(UsernameAccountType::NAME, new UsernameAccountType);
+        //     $authManager = new AuthManager($config->get('authentication')->expirationTime);
+        //     $authManager->registerAccountType(UsernameAccountType::NAME, new UsernameAccountType);
 
-            return $authManager;
-        });
+        //     return $authManager;
+        // });
 
         /**
          * @description Phalcon - \Phalcon\Mvc\Model\Manager
@@ -121,6 +125,6 @@ class ServiceBootstrap implements BootstrapInterface
         /**
          * @description PhalconRest - \PhalconRest\User\Service
          */
-        $di->setShared(Services::USER_SERVICE, new UserService);
+        // $di->setShared(Services::USER_SERVICE, new UserService);
     }
 }
