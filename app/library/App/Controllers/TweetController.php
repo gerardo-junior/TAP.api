@@ -2,10 +2,19 @@
 
 namespace App\Controllers;
 
-use Phalcon\Mvc\Controller;
+use App\Model\Tweet;
 
-class TweetController extends Controller
+use PhalconRest\Mvc\Controllers\ResourceController;
+
+class TweetController extends ResourceController
 {
+
+    public function all()
+    {  
+        $response = Tweet::findFirst();
+        return $this->createArrayResponse($response, 'data');
+    }
+
     public function index()
     {
         $tweet = Tweet::find();

@@ -8,7 +8,7 @@ use Phalcon\DiInterface;
 use PhalconRest\Api;
 
 use App\Collections\ExportCollection;
-use App\Resources\UserResource;
+// use App\Resources\UserResource;
 use App\Resources\TweetResource;
 
 class CollectionBootstrap implements BootstrapInterface
@@ -17,7 +17,7 @@ class CollectionBootstrap implements BootstrapInterface
     {
         $api
             ->collection(new ExportCollection('/export'))
-            ->resource(new UserResource('/users'))
+            // ->resource(new UserResource('/users'))
             ->resource(new TweetResource('/tweets'))
         ;
     }

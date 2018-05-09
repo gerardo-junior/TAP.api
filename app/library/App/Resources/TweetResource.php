@@ -4,7 +4,7 @@ namespace App\Resources;
 
 use PhalconRest\Api\ApiResource;
 use PhalconRest\Api\ApiEndpoint;
-use App\Controllers\UserController;
+use App\Controllers\TweetController;
 
 class TweetResource extends ApiResource {
 

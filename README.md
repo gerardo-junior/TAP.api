@@ -57,6 +57,7 @@ and configure apache for [/public](/public) folder
 ## Used packages:
 
 - [redound/phalcon-rest](https://packagist.org/packages/redound/phalcon-rest): ^2.0.0
+- [phalcon/incubator](https://packagist.org/packages/phalcon/incubator): "3.3
 - [league/fractal](https://packagist.org/packages/league/fractal): ^0.13.0
 - [cboden/ratchet](https://packagist.org/packages/cboden/ratchet): ^0.4.1
 - [zircote/swagger-php](https://packagist.org/packages/zircote/swagger-php): ^2.0
@@ -71,7 +72,29 @@ for development environment:
 
 ## Troubleshooting
 
+- Is the port already used by other services?
 
+edit the file [docker-compose.yml](docker-compose.yml)
+```yml
+# (...)
+
+api: 
+  image: gerardojunior/tap.api.environment:stable
+  restart: on-failure
+  volumes:
+    - type: bind
+      source: ./
+      target: /usr/share/src
+  ports:
+    - [any door]:80
+    - [any door]:8080
+  links:
+    - mongodb
+  depends_on:
+    - mongodb
+
+# (...)
+```
 
 ### License  
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
