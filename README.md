@@ -11,7 +11,7 @@
 
 | master  | develop  |
 | :------------: | :------------: |
-| [![Build Status](https://api.travis-ci.org/gerardo-junior/tap.api.svg?branch=master)](https://travis-ci.org/gerardo-junior/tap.api)  |  [![Build Status](https://api.travis-ci.org/gerardo-junior/tap.api.svg?branch=develop)](https://travis-ci.org/gerardo-junior/tap.api) |
+| [![Build Status](https://api.travis-ci.org/gerardo-junior/TAP.api.svg?branch=master)](https://travis-ci.org/gerardo-junior/TAP.api)  |  [![Build Status](https://api.travis-ci.org/gerardo-junior/TAP.api.svg?branch=develop)](https://travis-ci.org/gerardo-junior/TAP.api) |
 
 ## Come on, do your tests
 

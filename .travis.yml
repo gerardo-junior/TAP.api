@@ -24,7 +24,7 @@ install:
   - docker pull gerardojunior/tap.api.environment:stable
 
 script:
-  - docker run -it -rm $(pwd):/usr/share/src gerardojunior/tap.api.environment:stable composer test
+  - docker run -it --rm -v $(pwd):/usr/share/src gerardojunior/tap.api.environment:stable composer test
   - docker-compose up -d
   - docker-compose down
 
