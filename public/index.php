@@ -85,10 +85,10 @@ try {
     }
 
     $debugMode = isset($config->debug) ? $config->debug : (APPLICATION_ENV == 'development');
+    $debugMode = $debugMode === 'true' || $debugMode ? true : false;
 
     $response->setErrorContent($e, $debugMode);
-}
-finally {
+} finally {
 
     // Send response
     if (!$response->isSent()) {
