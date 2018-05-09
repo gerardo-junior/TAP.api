@@ -46,9 +46,15 @@ class ServiceBootstrap implements BootstrapInterface
                 );
             }
 
-            return new \MongoDB\Driver\Manager($dsn);
+            // return new \MongoDB\Driver\Manager($dsn);
+            $client = new \Phalcon\Db\Adapter\Mongo\Client($dsn);
+            return $client->selectDB($config->database->mongodb->database);
         });
 
+        // Collection Manager is required for MongoDB
+        $di->setShared('collectionManager', function () {
+            return new Manager();
+        });
 
         /**
          * @description Phalcon - \Phalcon\Mvc\Url
