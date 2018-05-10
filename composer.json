@@ -14,7 +14,8 @@
         "league/fractal": "^0.13.0",
         "cboden/ratchet": "^0.4.1",
         "zircote/swagger-php": "^2.0",
-        "spatie/twitter-streaming-api": "^1.4"
+        "spatie/twitter-streaming-api": "^1.4",
+        "j7mbo/twitter-api-php": "^1.0"
     },
     "require-dev": {
         "ext-xdebug": "^2.6",
