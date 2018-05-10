@@ -2,3 +2,5 @@
 /build/
 .phplint-cache
 config.ini
+.idea
+.vscode
