@@ -17,8 +17,8 @@
 
 #### But what will you need?
 
-- [docker](https://docs.docker.com/install/)
-- [docker-compose](https://docs.docker.com/compose/)
+- [docker](https://docs.docker.com/install/) ~ 18.04.0-ce
+- [docker-compose](https://docs.docker.com/compose/) ~ 1.21.1
 
 #### Okay, how to put it to up?
 
@@ -37,23 +37,33 @@ cp config.example.ini config.ini # and configure!
 
 ready, now you can use ;)
 
-to access the api:
 ```bash
-docker-compose up
-# Wait for message and open http://localhost:1234 in your browser
+docker-compose up # the first time, it will download the images
 ```
 
-or use the cli
+*~ Tip: using the docker-compose you can add `-d` and you can keep with your terminal ~*
+
+To access the api:
+
+Wait for message and open [localhost:1234](http://localhost:1234) in your browser
+
+To use a cli:
 ```bash
-docker-compose run api php console
+docker-compose exec api php console
 ```
 
-** For more information about the containers read the [README](http://github.com/gerardo-junior/TAP.api.environment) of api.environment
+** For more information about the api container read the [README](http://github.com/gerardo-junior/TAP.api.environment) of api.environment
 
 #### How to delete used images
 
 ```bash
 docker-compose down --rmi all
+```
+
+#### To delete the database:
+
+```bash
+docker volume rm tap-dbdata
 ```
 
 
@@ -73,11 +83,12 @@ and configure apache for [/public](/public) folder
 ## Used packages:
 
 - [redound/phalcon-rest](https://packagist.org/packages/redound/phalcon-rest): ^2.0.0
-- [phalcon/incubator](https://packagist.org/packages/phalcon/incubator): "3.3
+- [phalcon/incubator](https://packagist.org/packages/phalcon/incubator): 3.3
 - [league/fractal](https://packagist.org/packages/league/fractal): ^0.13.0
 - [cboden/ratchet](https://packagist.org/packages/cboden/ratchet): ^0.4.1
 - [zircote/swagger-php](https://packagist.org/packages/zircote/swagger-php): ^2.0
 - [spatie/twitter-streaming-api](https://packagist.org/packages/spatie/twitter-streaming-api): ^1.4
+- [j7mbo/twitter-api-php](https://packagist.org/packages/j7mbo/twitter-api-php): ^1.0
 
 for development environment:
 
