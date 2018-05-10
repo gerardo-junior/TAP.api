@@ -54,6 +54,23 @@ docker-compose exec api php console
 
 ** For more information about the api container read the [README](http://github.com/gerardo-junior/TAP.api.environment) of api.environment
 
+#### How can i use the cli?
+
+```bash
+docker-compose exec api php console twitter tweets [term of serach]
+```
+* ~ Tip: in bash, the `#` character is used for comments so you should escape them, with the `\` . example: `\#` ~ *
+
+examples of use:
+
+```bash
+# get last tweets
+docker-compose exec api php console twitter tweets \#worldCup 
+
+# real time tweets
+docker-compose exec api php console twitter tweets --real-time \#worldCup
+```
+
 #### How to delete used images
 
 ```bash

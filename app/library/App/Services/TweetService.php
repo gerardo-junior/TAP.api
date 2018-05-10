@@ -46,23 +46,25 @@ class TweetService
         
         if(!$tweet) { 
             $tweet = new Tweet();
-        }
-        
-        $tweet->text = $tweetItem->text;
-        $tweet->tweetId = $tweetItem->id;
-        
-        if (isset($tweetItem->extended_entities) && isset($tweetItem->extended_entities->media)) {
-            $tweet->media = $tweetItem->extended_entities->media;
-        }
-        
-        $tweet->user = $tweetItem->user;
-        
-        if (isset($tweetItem->metadata)) {
-            $tweet->metadata = $tweetItem->metadata;
-        }
+            
+            $tweet->text = $tweetItem->text;
+            $tweet->tweetId = $tweetItem->id;
 
-        $tweet->entities = $tweetItem->entities;
-        $tweet->entities = $tweetItem->entities;
+            if (isset($tweetItem->extended_entities) && isset($tweetItem->extended_entities->media)) {
+                $tweet->media = $tweetItem->extended_entities->media;
+            }
+
+            $tweet->user = $tweetItem->user;
+
+            if (isset($tweetItem->metadata)) {
+                $tweet->metadata = $tweetItem->metadata;
+            }
+
+            $tweet->entities = $tweetItem->entities;
+            $tweet->entities = $tweetItem->entities;
+
+        } 
+
         $tweet->status = array('retweet' => $tweetItem->retweet_count,
                                'favorite' => $tweetItem->favorite_count);
         

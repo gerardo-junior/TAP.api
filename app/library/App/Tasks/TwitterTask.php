@@ -18,18 +18,33 @@ class TwitterTask extends Task
         switch ($params[0]) {
             case '--real-time':
             case '-f':
-                
                 $twitterSteam = $this->di->get(Services::TWITTERSTEAM);
-                $twitterSteam->whenHears($params[1], function(array $tweet) {
+                
+                unset($params[0]);
 
-                    $this->printTweet($this->di->get(Services::TWEETSERVICE)->save((object) $tweet));
+                foreach($params as $term) {
+                    $twitterSteam->whenHears($term, function(array $tweetItem) {
+                        $tweet = $this->di->get(Services::TWEETSERVICE)->save((object) $tweetItem);
+                        
+                        if ($tweet) {
+                            $this->printTweet($tweet);
+                        }           
+                    });
+                }
 
-                })->startListening();
+                
 
+                 $twitterSteam->startListening();
+            
+            case '-h':
+            case '--help':
             break;
             default:
-
-                $tweets = $tweetService->getLast($limit = null, $offset = null);
+                if (is_null($params[0])) {
+                    $tweets = $tweetService->getLast($limit = null, $offset = null);
+                } else {
+                    $tweets = $tweetService->getAndSaveLasts($params[0]);
+                }
                 foreach($tweets as $tweet){
                     $this->printTweet($tweet);
                     unset($tweet);
@@ -44,7 +59,7 @@ class TwitterTask extends Task
     private function printTweet($tweet) 
     {
         echo'===================================== ID: '. $tweet->tweetId .' =========================================' .PHP_EOL;
-        echo 'User: ' . $tweet->user['screen_name'] .', '.$tweet->status['retweet'].' retweets, '.$tweet->status['favorite'].' favorites'.PHP_EOL;
+        echo 'User: ' . ((array) $tweet->user)['screen_name'] .', '.$tweet->status['retweet'].' retweets, '.$tweet->status['favorite'].' favorites'.PHP_EOL;
         echo $tweet->text .PHP_EOL;
         echo '------------------------------------------------------------------------------------------------------'.PHP_EOL.PHP_EOL.PHP_EOL.PHP_EOL;
     }

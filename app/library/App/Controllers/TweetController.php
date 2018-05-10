@@ -9,6 +9,16 @@ use App\Model\Tweet;
 
 class TweetController extends ResourceController
 {
+    
+    public function all() 
+    {
+        $tweetService = $this->di->get(Services::TWEETSERVICE);
+        $limit = $getfield = $this->di->get('request')->get('limit');
+        $offset = $getfield = $this->di->get('request')->get('offset');
+        $response = $tweetService->getLast($limit, $offset);
+        return $this->createArrayResponse($response, 'data');
+    }
+
     public function serach()
     {  
         $getfield = $this->di->get('request')->get('q');
@@ -16,6 +26,7 @@ class TweetController extends ResourceController
         $response = $tweetService->getAndSaveLasts($getfield);
         return $this->createArrayResponse($response, 'data');
     }
+    
 
     public function index()
     {
