@@ -70,6 +70,7 @@ docker-compose exec api php console twitter tweets \#worldCup
 # real time tweets
 docker-compose exec api php console twitter tweets --real-time \#worldCup
 ```
+* ~ You can filter by `\#hashtags`, by `@users`, by `text` .... *
 
 #### How to delete used images
 
