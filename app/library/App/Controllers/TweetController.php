@@ -2,16 +2,18 @@
 
 namespace App\Controllers;
 
-use App\Model\Tweet;
-
 use PhalconRest\Mvc\Controllers\ResourceController;
+use App\Constants\Services;
+use Phalcon\Di;
+use App\Model\Tweet;
 
 class TweetController extends ResourceController
 {
-
-    public function all()
+    public function serach()
     {  
-        $response = Tweet::findFirst();
+        $getfield = $this->di->get('request')->get('q');
+        $tweetService = $this->di->get(Services::TWEETSERVICE);
+        $response = $tweetService->getAndSaveLasts($getfield);
         return $this->createArrayResponse($response, 'data');
     }
 

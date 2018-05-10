@@ -22,19 +22,35 @@
 
 #### Okay, how to put it to up?
 
+First clone of the project
 ```bash
 git clone https://github.com/gerardo-junior/tap.api.git
 cd tap.api
-
-cp config.example.ini config.ini # and configure!
-docker-compose up
 ```
 
-Wait for message and open [localhost:1234](http://localhost:1234) in your browser
+
+Copy the configuration file, and edit
+```bash
+cp config.example.ini config.ini # and configure!
+```
+
+
+ready, now you can use ;)
+
+to access the api:
+```bash
+docker-compose up
+# Wait for message and open http://localhost:1234 in your browser
+```
+
+or use the cli
+```bash
+docker-compose run api php console
+```
 
 ** For more information about the containers read the [README](http://github.com/gerardo-junior/TAP.api.environment) of api.environment
 
-#### How to delete used imagess
+#### How to delete used images
 
 ```bash
 docker-compose down --rmi all

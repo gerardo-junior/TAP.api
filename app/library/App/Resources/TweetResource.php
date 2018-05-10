@@ -18,9 +18,10 @@ class TweetResource extends ApiResource {
             ->itemKey('tweet')
             ->collectionKey('tweets')
 
-            ->endpoint(ApiEndpoint::all()
-                ->description('Returns all tweets registered')
-            )
+            // ->endpoint(ApiEndpoint::all()
+            //     ->description('Returns all tweets registered')
+            // )
+            ->endpoint(ApiEndpoint::get('/serach', 'serach'))
         ;
     }
 }

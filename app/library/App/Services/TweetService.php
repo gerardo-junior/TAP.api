@@ -15,7 +15,7 @@ class TweetService
         $url = 'https://api.twitter.com/1.1/search/tweets.json';
         $requestMethod = 'GET';
 
-        $tweets =  json_decode($twitter->setGetfield($getfield)
+        $tweets =  json_decode($twitter->setGetfield('?q='.$getfield)
                                        ->buildOauth($url, $requestMethod)
                                        ->performRequest());
 
@@ -23,27 +23,9 @@ class TweetService
 
         foreach($tweets->statuses as $tweetItem) {
 
-            if(!Tweet::findFirst([['tweetId' =>  $tweetItem->id]])) {
-                $tweet = new Tweet();
-                $tweet->tweetId = $tweetItem->id;
-                $tweet->text = $tweetItem->text;
-
-                if (isset($tweetItem->extended_entities) && isset($tweetItem->extended_entities->media)) {
-                    $tweet->media = $tweetItem->extended_entities->media;
-                }
-                
-                $tweet->user = $tweetItem->user;
-                $tweet->metadata = $tweetItem->metadata;
-                $tweet->entities = $tweetItem->entities;
-                $tweet->entities = $tweetItem->entities;
-                $tweet->status = array(
-                                       'retweet' => $tweetItem->retweet_count,
-                                       'favorite' => $tweetItem->favorite_count
-                                      );
-
-                if (!is_null($tweet->text)) {
-                    $tweet->save();
-                }    
+            $tweet = $this->save($tweetItem);
+            
+            if ($tweet) {
                 $data[] =  $tweet;
             }
             
@@ -52,6 +34,45 @@ class TweetService
         unset($tweets);
 
         return $data;
+    }
+
+    public function save($tweetItem)
+    {
+        if (is_null($tweetItem->text)) {
+            return false;
+        }
+        
+        $tweet = Tweet::findFirst([['tweetId' =>  $tweetItem->id]]);
+        
+        if(!$tweet) { 
+            $tweet = new Tweet();
+        }
+        
+        $tweet->text = $tweetItem->text;
+        $tweet->tweetId = $tweetItem->id;
+        
+        if (isset($tweetItem->extended_entities) && isset($tweetItem->extended_entities->media)) {
+            $tweet->media = $tweetItem->extended_entities->media;
+        }
+        
+        $tweet->user = $tweetItem->user;
+        
+        if (isset($tweetItem->metadata)) {
+            $tweet->metadata = $tweetItem->metadata;
+        }
+
+        $tweet->entities = $tweetItem->entities;
+        $tweet->entities = $tweetItem->entities;
+        $tweet->status = array('retweet' => $tweetItem->retweet_count,
+                               'favorite' => $tweetItem->favorite_count);
+        
+        $tweet->save();
+        return $tweet;
+    }
+
+    public function getLast($limit, $offset) 
+    {
+        return Tweet::find();
     }
 }
     

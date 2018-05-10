@@ -11,6 +11,7 @@ services:
     ports:
       - 1234:80
       - 4321:8080
+    # - 3000:3000 # ~ xdebug
     links:
       - mongodb
     depends_on:

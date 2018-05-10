@@ -10,16 +10,16 @@ use App\Constants\Services;
 use App\Fractal\CustomSerializer;
 use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Mvc\View\Simple as View;
-// use App\User\Service as UserService;
-use App\Auth\Manager as AuthManager;
+// use App\Auth\Manager as AuthManager;
 use Phalcon\Events\Manager as EventsManager;
 use League\Fractal\Manager as FractalManager;
 use Phalcon\Mvc\Model\Manager as ModelsManager;
 use PhalconApi\Auth\TokenParsers\JWTTokenParser;
+use App\Services\TweetService;
 
 class ServiceBootstrap implements BootstrapInterface
 {
-    public function run(Api $api, DiInterface $di, Config $config)
+    public function run($app, $di, Config $config)
     {
         /**
          * @description Config - \Phalcon\Config
@@ -53,6 +53,30 @@ class ServiceBootstrap implements BootstrapInterface
         $di->setShared('collectionManager', function () {
             return new \Phalcon\Mvc\Collection\Manager();
         });
+
+        $di->set(Services::TWITTERAPI, function () use ($config) { 
+ 
+            $twitter = new \TwitterAPIExchange(array( 
+                'oauth_access_token'        => $config->get('twitter')->acesstoken->token, 
+                'oauth_access_token_secret' => $config->get('twitter')->acesstoken->secret, 
+                'consumer_key'              => $config->get('twitter')->consumer->key, 
+                'consumer_secret'           => $config->get('twitter')->consumer->secret 
+            )); 
+ 
+            return $twitter; 
+        }); 
+ 
+        $di->set(Services::TWITTERSTEAM, function () use ($config) { 
+ 
+            $twitter = \Spatie\TwitterStreamingApi\PublicStream::create( 
+                $config->get('twitter')->acesstoken->token, 
+                $config->get('twitter')->acesstoken->secret, 
+                $config->get('twitter')->consumer->key, 
+                $config->get('twitter')->consumer->secret 
+            ); 
+ 
+            return $twitter; 
+        }); 
 
         /**
          * @description Phalcon - \Phalcon\Mvc\Url
@@ -126,5 +150,7 @@ class ServiceBootstrap implements BootstrapInterface
          * @description PhalconRest - \PhalconRest\User\Service
          */
         // $di->setShared(Services::USER_SERVICE, new UserService);
+
+        $di->setShared(Services::TWEETSERVICE, new TweetService);
     }
 }

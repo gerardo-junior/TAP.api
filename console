@@ -1,0 +1,75 @@
+#!/usr/bin/env php
+<?php
+
+use Phalcon\Di\FactoryDefault\Cli as CliDI;
+use Phalcon\Cli\Console as ConsoleApp;
+use Phalcon\Loader;
+
+define("ROOT_DIR", __DIR__);
+define("APP_DIR", ROOT_DIR . '/app');
+define("VENDOR_DIR", ROOT_DIR . '/vendor');
+define("CONFIG_DIR", APP_DIR . '/configs');
+
+define('APPLICATION_ENV', getenv('APPLICATION_ENV') ?: 'development');
+
+// Autoload dependencies
+require VENDOR_DIR . '/autoload.php';
+
+$loader = new \Phalcon\Loader();
+
+$loader->registerNamespaces([
+    'App' => APP_DIR . '/library/App'
+]);
+
+$loader->registerDirs(array(
+    APP_DIR . '/library/App/Tasks',
+));
+
+$loader->register();
+
+// Config
+$configPath = ROOT_DIR. '/config.ini';
+
+if (!is_readable($configPath)) {
+    throw new Exception('Unable to read config from ' . $configPath);
+}
+
+$config = new Phalcon\Config\Adapter\Ini($configPath);
+
+
+// Instantiate application & DI
+$di = new CliDI();
+$console = new ConsoleApp();
+$console->setDI($di);
+
+$serviceBootstrap = new App\Bootstrap\ServiceBootstrap;
+$serviceBootstrap->run($console, $di, $config);
+
+$arguments = array();
+
+
+foreach ($argv as $k => $arg) {
+    if ($k === 1) {
+        $arguments['task'] = $arg;
+    } elseif ($k === 2) {
+        $arguments['action'] = $arg;
+    } elseif ($k >= 3) {
+        $arguments['params'][] = $arg;
+    }
+}
+
+try {
+    // Handle incoming arguments
+    $console->handle($arguments);
+} catch (\Phalcon\Exception $e) {
+    // Do Phalcon related stuff here
+    // ..
+    fwrite(STDERR, $e->getMessage() . PHP_EOL);
+    exit(1);
+} catch (\Throwable $throwable) {
+    fwrite(STDERR, $throwable->getMessage() . PHP_EOL);
+    exit(1);
+} catch (\Exception $exception) {
+    fwrite(STDERR, $exception->getMessage() . PHP_EOL);
+    exit(1);
+}
