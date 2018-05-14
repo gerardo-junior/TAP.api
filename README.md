@@ -115,6 +115,14 @@ for development environment:
 - [brainmaestro/composer-git-hooks](https://packagist.org/packages/brainmaestro/composer-git-hooks): ^2.4
 - [phalcon/devtools](https://packagist.org/packages/phalcon/devtools): ^3.2
 
+## How to connect mongodb database
+
+It depends on your client, but default port is `:27017` and you can get ip with this command.
+
+```bash
+docker-compose exec mongodb hostname -I
+```
+
 ## Troubleshooting
 
 #### Is the port already used by other services?
