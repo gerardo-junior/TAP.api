@@ -145,7 +145,7 @@ api:
 
 phalcon does not have full support for the multlib architecture, so maybe re-compiling the environment might resolve. 
 
-please read: [README.md](https://github.com/gerardo-junior/TAP.api.environment#how-to-build) but remember to tag with tag of [docker-compose.yml](docker-compose.yml) ~ `gerardojunior/tap.api.environment:stable` by default 
+please read: [README.md](https://github.com/gerardo-junior/TAP.api.environment#how-to-build) but remember to tag with tag of [docker-compose.yml](docker-compose.yml) (`gerardojunior/tap.api.environment:stable` by default)
 
 ### License  
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
