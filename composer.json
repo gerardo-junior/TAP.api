@@ -30,7 +30,7 @@
         "test": [
             "@lint"
         ],
-        "post-root-package-install": [
+        "pre-autoload-dump": [
             "php -r \"file_exists('config.ini') || copy('config.example.ini', 'config.ini');\""
         ]
     },
