@@ -117,7 +117,7 @@ for development environment:
 
 ## Troubleshooting
 
-- Is the port already used by other services?
+#### Is the port already used by other services?
 
 edit the file [docker-compose.yml](docker-compose.yml)
 ```yml
@@ -141,7 +141,7 @@ api:
 # (...)
 ```
 
-- The browser just says, "connection reset" or something like that with `child pid xxx exit signal Illegal instruction` log ?
+#### The browser just says: "connection reset" or something like that with `child pid xxx exit signal Illegal instruction` log ?
 
 phalcon does not have full support for the multlib architecture, so maybe re-compiling the environment might resolve. 
 
