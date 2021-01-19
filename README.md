@@ -6,7 +6,7 @@
     [+] SITE:         https://gerardo-junior.com
     [+] EMAIL:        me@gerardo-junior.com
     [+] GITHUB:       https://github.com/gerardo-junior/tap.api
-    [+] TELEGRAM:     @MrGerardoJunior
+    [+] TELEGRAM:     @gerardojunior
 ```
 
 | master  | develop  |
